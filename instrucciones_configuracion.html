@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Space Racing Game - Configuración</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            color: #00ff00;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            color: #ffd700;
+            border-bottom: 2px solid #ffd700;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        
+        .step {
+            background: rgba(0, 255, 0, 0.1);
+            border-left: 4px solid #00ff00;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .warning {
+            background: rgba(255, 165, 0, 0.1);
+            border-left: 4px solid #ffa500;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            color: #ffa500;
+        }
+        
+        .success {
+            background: rgba(0, 255, 0, 0.1);
+            border-left: 4px solid #00ff00;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        code {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #00ffff;
+        }
+        
+        .code-block {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #333;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 10px 0;
+            color: #00ffff;
+        }
+        
+        .button {
+            display: inline-block;
+            background: linear-gradient(45deg, #00ff00, #00cc00);
+            color: #000;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 10px 5px;
+            transition: all 0.3s;
+        }
+        
+        .button:hover {
+            background: linear-gradient(45deg, #00cc00, #009900);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+        }
+        
+        .credentials {
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid #ffd700;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        
+        ul, ol {
+            padding-left: 20px;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+        
+        .status {
+            text-align: center;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        
+        .status.checking {
+            background: rgba(255, 165, 0, 0.1);
+            border: 2px solid #ffa500;
+            color: #ffa500;
+        }
+        
+        .status.success {
+            background: rgba(0, 255, 0, 0.1);
+            border: 2px solid #00ff00;
+            color: #00ff00;
+        }
+        
+        .status.error {
+            background: rgba(255, 0, 0, 0.1);
+            border: 2px solid #ff0000;
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Space Racing Game - Configuración de Base de Datos</h1>
+        
+        <div id="status" class="status checking">
+            <h3>🔍 Verificando configuración...</h3>
+            <p>Comprobando si la base de datos está configurada correctamente...</p>
+        </div>
+        
+        <h2>⚡ Configuración Automática (Recomendada)</h2>
+        
+        <div class="step">
+            <h3>Paso 1: Verificar MySQL</h3>
+            <p>Asegúrate de que <strong>MySQL</strong> esté ejecutándose en tu sistema.</p>
+            <ul>
+                <li>XAMPP: Inicia Apache y MySQL</li>
+                <li>WAMP: Inicia todos los servicios</li>
+                <li>MAMP: Inicia los servidores</li>
+            </ul>
+        </div>
+        
+        <div class="step">
+            <h3>Paso 2: Configuración Automática</h3>
+            <p>Haz clic en el botón para configurar automáticamente la base de datos:</p>
+            <a href="setup_database.php" class="button">🔧 Configurar Base de Datos Automáticamente</a>
+        </div>
+        
+        <div class="success">
+            <h3>✅ Credenciales de Prueba</h3>
+            <div class="credentials">
+                <p><strong>Usuario:</strong> <code>testuser</code></p>
+                <p><strong>Contraseña:</strong> <code>123456</code></p>
+                <p><strong>Créditos iniciales:</strong> <code>100</code></p>
+            </div>
+        </div>
+        
+        <h2>🔧 Configuración Manual (Alternativa)</h2>
+        
+        <div class="warning">
+            <h3>⚠️ Solo si la configuración automática falla</h3>
+            <p>Usa estos pasos solo si el método automático no funciona.</p>
+        </div>
+        
+        <div class="step">
+            <h3>Paso 1: Crear Base de Datos</h3>
+            <p>Abre phpMyAdmin o MySQL Workbench y ejecuta:</p>
+            <div class="code-block">
+CREATE DATABASE space_racing_game CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE space_racing_game;
+            </div>
+        </div>
+        
+        <div class="step">
+            <h3>Paso 2: Ejecutar SQL</h3>
+            <p>Ejecuta el archivo <code>database.sql</code> en tu base de datos.</p>
+        </div>
+        
+        <div class="step">
+            <h3>Paso 3: Configurar Credenciales</h3>
+            <p>Si tus credenciales de MySQL son diferentes, edita <code>config.php</code>:</p>
+            <div class="code-block">
+$host = 'localhost';        // Tu host de MySQL
+$username = 'root';         // Tu usuario de MySQL  
+$password = '';             // Tu contraseña de MySQL
+$dbname = 'space_racing_game';
+            </div>
+        </div>
+        
+        <h2>🎮 ¡Listo para Jugar!</h2>
+        
+        <div class="success">
+            <h3>Una vez configurado:</h3>
+            <ol>
+                <li>Ve a <a href="index.html" class="button">🎮 Iniciar Juego</a></li>
+                <li>Usa las credenciales de prueba o crea una cuenta nueva</li>
+                <li>¡Disfruta del juego con sistema de créditos!</li>
+            </ol>
+        </div>
+        
+        <h2>🐛 Solución de Problemas</h2>
+        
+        <div class="step">
+            <h3>Error: "Base de datos no configurada"</h3>
+            <ul>
+                <li>Verifica que MySQL esté ejecutándose</li>
+                <li>Ejecuta <a href="setup_database.php">setup_database.php</a></li>
+                <li>Verifica las credenciales en <code>config.php</code></li>
+            </ul>
+        </div>
+        
+        <div class="step">
+            <h3>Error: "Access denied"</h3>
+            <ul>
+                <li>Verifica usuario y contraseña en <code>config.php</code></li>
+                <li>Asegúrate de que el usuario tenga permisos</li>
+            </ul>
+        </div>
+        
+        <div class="step">
+            <h3>Error: "Database doesn't exist"</h3>
+            <ul>
+                <li>Crea la base de datos manualmente</li>
+                <li>O ejecuta <a href="setup_database.php">setup_database.php</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        // Verificar estado de la configuración
+        function checkDatabaseStatus() {
+            fetch('auth.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    action: 'checkDatabase'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const statusDiv = document.getElementById('status');
+                if (data.success) {
+                    statusDiv.className = 'status success';
+                    statusDiv.innerHTML = `
+                        <h3>✅ Base de Datos Configurada Correctamente</h3>
+                        <p>La base de datos está funcionando. ¡Puedes empezar a jugar!</p>
+                        <a href="index.html" class="button">🎮 Ir al Juego</a>
+                    `;
+                } else {
+                    statusDiv.className = 'status error';
+                    statusDiv.innerHTML = `
+                        <h3>❌ Base de Datos No Configurada</h3>
+                        <p>${data.message || 'La base de datos necesita ser configurada.'}</p>
+                        <a href="setup_database.php" class="button">🔧 Configurar Ahora</a>
+                    `;
+                }
+            })
+            .catch(error => {
+                const statusDiv = document.getElementById('status');
+                statusDiv.className = 'status error';
+                statusDiv.innerHTML = `
+                    <h3>❌ Error de Conexión</h3>
+                    <p>No se pudo verificar el estado de la base de datos.</p>
+                    <a href="setup_database.php" class="button">🔧 Configurar Base de Datos</a>
+                `;
+            });
+        }
+        
+        // Verificar al cargar la página
+        checkDatabaseStatus();
+    </script>
+</body>
+</html>

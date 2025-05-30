@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Space Racing Game - Inicio de Sesión</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;700&display=swap');
+        
+        @font-face {
+            font-family: 'snk';
+            src: url('snk.ttf') format('truetype');
+        }
+        body {
+            font-family: 'Orbitron', 'Exo 2', 'snk', Arial, sans-serif;
+            background: url('Images/main-background.webp') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+        .login-container {
+            width: 350px;
+            margin: 80px auto;
+            background: linear-gradient(145deg, rgba(0,0,0,0.9), rgba(0,50,100,0.8));
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #00bfff;
+            box-shadow: 0 0 30px rgba(0,191,255,0.5);
+        }
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #00bfff;
+            text-shadow: 0 0 10px #00bfff;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        .user-info {
+            background: rgba(0,191,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #00bfff;
+            text-align: center;
+        }
+        .credits-display {
+            font-size: 1.2em;
+            color: #ffd700;
+            font-weight: bold;
+            text-shadow: 0 0 5px #ffd700;
+        }
+        .login-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #00bfff;
+        }
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #00bfff;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+        }
+        .login-container input[type="text"]:focus,
+        .login-container input[type="password"]:focus {
+            outline: none;
+            border-color: #ffd700;
+            box-shadow: 0 0 10px rgba(255,215,0,0.5);
+        }
+        .login-container button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(45deg, #00bfff, #0080ff);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0,191,255,0.5);
+        }
+        .login-container button:hover {
+            background: linear-gradient(45deg, #0080ff, #00bfff);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,191,255,0.7);
+        }
+        .login-container button:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .error-message {
+            background: rgba(255,0,0,0.2);
+            color: #ff6b6b;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ff6b6b;
+            text-align: center;
+        }
+        .success-message {
+            background: rgba(0,255,0,0.2);
+            color: #00ff00;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #00ff00;
+            text-align: center;
+        }
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+        }
+        .modal-content {
+            background: linear-gradient(145deg, rgba(0,0,0,0.95), rgba(0,50,100,0.9));
+            margin: 5% auto;
+            padding: 30px;
+            border: 2px solid #00bfff;
+            width: 90%;
+            max-width: 700px;
+            border-radius: 20px;
+            color: white;
+            font-family: 'Orbitron', 'Exo 2', 'snk', Arial, sans-serif;
+            box-shadow: 0 0 30px rgba(0,191,255,0.7);
+        }
+        .modal-content h3 {
+            margin-top: 0;
+            color: #00bfff;
+            text-shadow: 0 0 10px #00bfff;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        .modal-content button {
+            margin: 10px;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #00bfff, #0080ff);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0,191,255,0.5);
+        }
+        .modal-content button:hover {
+            background: linear-gradient(45deg, #0080ff, #00bfff);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,191,255,0.7);
+        }
+        .ranking-section {
+            background: rgba(255,215,0,0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 1px solid #ffd700;
+        }
+        .ranking-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,215,0,0.3);
+        }
+        .ranking-item:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container" id="loginContainer">
+        <h2>🚀 SPACE RACING 🚀</h2>
+        
+        <div id="userInfo" class="user-info" style="display: none;">
+            <div>Bienvenido: <span id="usernameDisplay"></span></div>
+            <div class="credits-display">💰 Créditos: <span id="creditsDisplay">5</span>/5</div>
+            <div style="font-size: 0.9em; margin-top: 5px;">Mejor Puntuación: <span id="bestScoreDisplay">0</span></div>
+        </div>
+        
+        <div id="loginForm">
+            <div id="messageContainer"></div>
+            <label for="username">Nombre de usuario:</label>
+            <input type="text" id="username" name="username" required placeholder="Ingrese su usuario" />
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" required placeholder="Ingrese su contraseña" />
+            <button type="submit" id="loginBtn">Entrar</button>
+            <div style="text-align: center; margin-top: 15px; font-size: 0.9em; color: #ffd700;">
+                💡 Si no tienes cuenta, se creará automáticamente
+            </div>
+        </div>
+        
+        <div id="gameControls" style="display: none;">
+            <button id="playGameBtn" style="margin-bottom: 10px;">🎮 Jugar (1 Crédito)</button>
+            <button id="viewRankingBtn" style="margin-bottom: 10px;">🏆 Ver Ranking</button>
+            <button id="logoutBtn" style="background: #ff6b6b;">🚪 Cerrar Sesión</button>
+        </div>
+    </div>
+
+    <!-- Modal de instrucciones -->
+    <div id="instruccionesModal" class="modal">
+        <div class="modal-content">
+            <h3>🚀 Instrucciones del Space Racing Game 🚀</h3>
+            <div style="text-align: left; margin: 20px 0;">
+                <h4 style="color: #00bfff; margin-bottom: 10px;">🎮 Controles:</h4>
+                <ul style="margin-bottom: 15px;">
+                    <li>⬅️➡️ <strong>Flechas Izquierda/Derecha:</strong> Mover nave horizontalmente</li>
+                    <li>⬆️⬇️ <strong>Flechas Arriba/Abajo:</strong> Mover nave verticalmente</li>
+                    <li>🚀 <strong>ESPACIO:</strong> Disparar láser</li>
+                    <li>⏸️ <strong>P:</strong> Pausar/Reanudar juego</li>
+                </ul>
+                
+                <h4 style="color: #ffd700; margin-bottom: 10px;">⚡ Power-Ups:</h4>
+                <ul style="margin-bottom: 15px;">
+                    <li>🛡️ <strong>Escudo:</strong> Protección temporal contra enemigos</li>
+                    <li>⚡ <strong>Velocidad:</strong> Movimiento más rápido por 5 segundos</li>
+                    <li>🔫 <strong>Multi-disparo:</strong> Triple láser por 5 segundos</li>
+                    <li>❤️ <strong>Vida:</strong> Restaura 30 puntos de salud</li>
+                </ul>
+                
+                <h4 style="color: #ff6b6b; margin-bottom: 10px;">👾 Enemigos:</h4>
+                <ul style="margin-bottom: 15px;">
+                    <li>🛸 <strong>Naves básicas:</strong> 1 disparo para destruir (10 puntos)</li>
+                    <li>👹 <strong>Monstruos:</strong> 2 disparos para destruir (10 puntos × nivel)</li>
+                    <li>⚠️ <strong>Colisión:</strong> Pierdes 20 puntos de vida</li>
+                </ul>
+                
+                <h4 style="color: #00ff00; margin-bottom: 10px;">🏆 Objetivos:</h4>
+                <ul style="margin-bottom: 15px;">
+                    <li>🎯 Destruye enemigos para ganar puntos</li>
+                    <li>📈 Cada 10 enemigos eliminados subes de nivel</li>
+                    <li>⏱️ Sobrevive el mayor tiempo posible</li>
+                    <li>🎰 Al perder, gira la ruleta para multiplicar tu puntuación</li>
+                </ul>
+                
+                <div style="background: rgba(255,215,0,0.1); padding: 10px; border-radius: 8px; border: 1px solid #ffd700; margin-top: 15px;">
+                    <p style="margin: 0; font-size: 0.9em; color: #ffd700;">
+                        💡 <strong>Consejo:</strong> Usa los power-ups estratégicamente y mantente en movimiento para evitar a los enemigos. ¡La velocidad aumenta con cada nivel!
+                    </p>
+                </div>
+            </div>
+            <button id="startGameBtn">Comenzar Juego</button>
+        </div>
+    </div>
+
+    <!-- Modal de ranking -->
+    <div id="rankingModal" class="modal">
+        <div class="modal-content">
+            <h3>🏆 Ranking Diario 🏆</h3>
+            <div class="ranking-section">
+                <div id="rankingList">
+                    <div style="text-align: center; color: #ffd700;">Cargando ranking...</div>
+                </div>
+            </div>
+            <button id="closeRankingBtn">Cerrar</button>
+        </div>
+    </div>
+
+    <script>
+        let currentUser = null;
+
+        // Verificar si hay sesión activa al cargar
+        document.addEventListener('DOMContentLoaded', function() {
+            checkSession();
+        });
+
+        // Función para verificar sesión
+        async function checkSession() {
+            try {
+                const response = await fetch('auth.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ action: 'getUserData' })
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    currentUser = data.user;
+                    showUserInterface();
+                }
+            } catch (error) {
+                console.log('No hay sesión activa');
+            }
+        }
+
+        // Manejar login
+        document.getElementById('loginBtn').addEventListener('click', async function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            
+            if (!username || !password) {
+                showMessage('Por favor complete todos los campos', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch('auth.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        action: 'login',
+                        username: username,
+                        password: password
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    currentUser = data.user;
+                    showMessage(data.message, 'success');
+                    setTimeout(() => {
+                        showUserInterface();
+                    }, 1000);
+                } else {
+                    showMessage(data.message, 'error');
+                }
+            } catch (error) {
+                showMessage('Error de conexión', 'error');
+            }
+        });
+
+        // Mostrar interfaz de usuario logueado
+        function showUserInterface() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('userInfo').style.display = 'block';
+            document.getElementById('gameControls').style.display = 'block';
+            
+            document.getElementById('usernameDisplay').textContent = currentUser.username;
+            document.getElementById('creditsDisplay').textContent = currentUser.credits;
+            document.getElementById('bestScoreDisplay').textContent = currentUser.best_score;
+            
+            // Deshabilitar botón de jugar si no hay créditos
+            const playBtn = document.getElementById('playGameBtn');
+            if (currentUser.credits <= 0) {
+                playBtn.disabled = true;
+                playBtn.textContent = '❌ Sin Créditos';
+            }
+        }
+
+        // Manejar botón de jugar
+        document.getElementById('playGameBtn').addEventListener('click', function() {
+            if (currentUser.credits <= 0) {
+                showMessage('No tienes créditos disponibles', 'error');
+                return;
+            }
+            
+            // Guardar datos del usuario en localStorage para el juego
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            
+            // Mostrar instrucciones
+            document.getElementById('instruccionesModal').style.display = 'block';
+        });
+
+        // Manejar botón de ranking
+        document.getElementById('viewRankingBtn').addEventListener('click', async function() {
+            try {
+                const response = await fetch('auth.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ action: 'getRanking' })
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    showRanking(data.ranking);
+                }
+            } catch (error) {
+                showMessage('Error al cargar ranking', 'error');
+            }
+        });
+
+        // Mostrar ranking
+        function showRanking(ranking) {
+            const rankingList = document.getElementById('rankingList');
+            
+            if (ranking.length === 0) {
+                rankingList.innerHTML = '<div style="text-align: center; color: #ffd700;">No hay partidas registradas hoy</div>';
+            } else {
+                let html = '';
+                ranking.forEach((player, index) => {
+                    const medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `${index + 1}.`;
+                    html += `
+                        <div class="ranking-item">
+                            <span>${medal} ${player.username}</span>
+                            <span style="color: #00ff00;">${player.best_score} pts</span>
+                        </div>
+                    `;
+                });
+                rankingList.innerHTML = html;
+            }
+            
+            document.getElementById('rankingModal').style.display = 'block';
+        }
+
+        // Cerrar modal de ranking
+        document.getElementById('closeRankingBtn').addEventListener('click', function() {
+            document.getElementById('rankingModal').style.display = 'none';
+        });
+
+        // Manejar logout
+        document.getElementById('logoutBtn').addEventListener('click', async function() {
+            try {
+                await fetch('auth.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ action: 'logout' })
+                });
+                
+                currentUser = null;
+                localStorage.removeItem('currentUser');
+                
+                // Resetear interfaz
+                document.getElementById('loginForm').style.display = 'block';
+                document.getElementById('userInfo').style.display = 'none';
+                document.getElementById('gameControls').style.display = 'none';
+                document.getElementById('username').value = '';
+                document.getElementById('password').value = '';
+                document.getElementById('messageContainer').innerHTML = '';
+                
+                showMessage('Sesión cerrada exitosamente', 'success');
+            } catch (error) {
+                showMessage('Error al cerrar sesión', 'error');
+            }
+        });
+
+        // Iniciar juego desde instrucciones
+        document.getElementById('startGameBtn').addEventListener('click', function() {
+            document.getElementById('instruccionesModal').style.display = 'none';
+            window.location.href = 'game.html';
+        });
+
+        // Función para mostrar mensajes
+        function showMessage(message, type) {
+            const container = document.getElementById('messageContainer');
+            const className = type === 'error' ? 'error-message' : 'success-message';
+            container.innerHTML = `<div class="${className}">${message}</div>`;
+            
+            setTimeout(() => {
+                container.innerHTML = '';
+            }, 5000);
+        }
+
+        // Cerrar modales al hacer clic fuera
+        window.addEventListener('click', function(event) {
+            const instruccionesModal = document.getElementById('instruccionesModal');
+            const rankingModal = document.getElementById('rankingModal');
+            
+            if (event.target === instruccionesModal) {
+                instruccionesModal.style.display = 'none';
+            }
+            if (event.target === rankingModal) {
+                rankingModal.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

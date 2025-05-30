@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Space Racing Game - Juego</title>
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+    <div class="game-container">
+        <canvas id="gameCanvas"></canvas>
+    </div>
+    
+    <div class="scoreboard">
+        <h3>🚀 SPACE RACING 🚀</h3>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <span>Puntuación:</span>
+                <span class="stat-value" id="score">0</span>
+            </div>
+            <div class="stat-item">
+                <span>Nivel:</span>
+                <span class="stat-value" id="level">1</span>
+            </div>
+            <div class="stat-item">
+                <span>Enemigos:</span>
+                <span class="stat-value" id="enemiesKilled">0</span>
+            </div>
+            <div class="stat-item">
+                <span>Tiempo:</span>
+                <span class="stat-value" id="gameTime">0s</span>
+            </div>
+        </div>
+        
+        <div class="stats">
+            <h4 style="color: #ff0000; margin-bottom: 10px;">❤️ Vida</h4>
+            <div class="health-bar">
+                <div class="health-fill" id="healthFill" style="width: 100%;"></div>
+            </div>
+        </div>
+        
+        <div class="power-ups">
+            <h4 style="color: #ffd700; margin-bottom: 10px;">⚡ Power-Ups</h4>
+            <div class="power-up-item">
+                <span>🛡️ Escudo:</span>
+                <span id="shieldStatus">Inactivo</span>
+            </div>
+            <div class="power-up-item">
+                <span>⚡ Velocidad:</span>
+                <span id="speedStatus">Normal</span>
+            </div>
+            <div class="power-up-item">
+                <span>🔫 Multi-disparo:</span>
+                <span id="multiShotStatus">Inactivo</span>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <h4>🎮 Controles</h4>
+            <div class="control-item">⬅️➡️ Mover nave</div>
+            <div class="control-item">⬆️⬇️ Subir/Bajar</div>
+            <div class="control-item">ESPACIO: Disparar</div>
+            <div class="control-item">P: Pausa</div>
+        </div>
+    </div>
+    
+    <!-- Modal de Game Over -->
+    <div id="gameOverModal" class="modal">
+        <div class="modal-content">
+            <h3>🎮 GAME OVER 🎮</h3>
+            <div class="final-stats">
+                <h4>📊 Estadísticas Finales</h4>
+                <div class="stat-item">
+                    <span>Puntuación Final:</span>
+                    <span class="stat-value" id="finalScore">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Nivel Alcanzado:</span>
+                    <span class="stat-value" id="finalLevel">1</span>
+                </div>
+                <div class="stat-item">
+                    <span>Enemigos Eliminados:</span>
+                    <span class="stat-value" id="finalEnemies">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Tiempo Jugado:</span>
+                    <span class="stat-value" id="finalTime">0s</span>
+                </div>
+            </div>
+            <button id="playAgainBtn">🔄 Jugar de Nuevo</button>
+            <button id="ruletaBtn">🎰 Girar Ruleta</button>
+            <button onclick="window.location.href='index.html'">🏠 Menú Principal</button>
+        </div>
+    </div>
+    
+    <!-- Modal de Ruleta -->
+    <div id="ruletaModal" class="modal roulette-modal">
+        <div class="modal-content">
+            <h3>🎰 ¡Gira la Ruleta de la Fortuna! 🎰</h3>
+            <p>Multiplica o reduce tu puntuación final</p>
+            <canvas id="ruletaCanvas" width="300" height="300"></canvas>
+            <br>
+            <button id="girarBtn">🎲 Girar Ruleta</button>
+            <p id="resultadoRuleta" style="font-size: 1.2em; margin: 15px 0;"></p>
+            <button id="cerrarRuletaBtn" style="display:none;">✅ Continuar</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
