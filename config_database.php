@@ -7,7 +7,7 @@
 // Configuración de la base de datos
 define('DB_HOST', 'localhost');
 define('DB_USERNAME', 'root');        // Cambiar por tu usuario de MySQL
-define('DB_PASSWORD', '');            // Cambiar por tu contraseña de MySQL
+define('DB_PASSWORD', 'admin');            // Cambiar por tu contraseña de MySQL
 define('DB_NAME', 'space_racing_game');
 
 // Configuración adicional
